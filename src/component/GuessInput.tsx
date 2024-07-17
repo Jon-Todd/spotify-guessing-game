@@ -1,28 +1,28 @@
-import { Autocomplete, createFilterOptions, TextField } from "@mui/material";
+import { Autocomplete, TextField } from "@mui/material";
 import { FC } from "react";
-import useSWR from "swr";
-import { getTopArtists } from "../utils/api";
+import { useTopArtists } from "../hooks/use-top-artists";
+import { Artist } from "../types/artists";
 
-const filterOptions = createFilterOptions({
-    matchFrom: 'start',
-    stringify: (option) => option.name,
-});
+interface GuessInputProps {
+    addGuess: (guess: Artist) => void;
+}
 
-
-export const GuessInput: FC = () => {
-
-
-    // Fetch top artists from highest context
-    const { data, isLoading } = useSWR('./getTopArtists', getTopArtists);
-    console.log("🚀 ~ data:", data)
-
-
+export const GuessInput: FC<GuessInputProps> = ({
+    addGuess
+}) => {
+    const { artists } = useTopArtists();
 
     return (
         <div className="flex rounded-lg shadow-sm w-96 mb-20">
-            {isLoading && <p>Loading...</p>}
-            {!isLoading &&
-                <Autocomplete style={{width: '100%'}} options={data.items} renderInput={(params) => <TextField {...params} label="Artist" filterOptions={filterOptions} getOptionLabel={(option) => option.name}  />} />
+            {
+                artists &&
+                <Autocomplete
+                    style={{width: '100%'}}
+                    options={artists}
+                    renderInput={(params) => <TextField {...params} label="Artists" />}
+                    getOptionLabel={(option) => option.name}
+                    onChange={(event, value) => value && addGuess(value)}
+                />
             }
         </div>
     )

@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { ArtistApiResponse } from '../types/artists';
 
 const client_id = import.meta.env.VITE_SPOTIFY_CLIENT_ID;
 const client_secret = import.meta.env.VITE_SPOTIFY_CLIENT_SECRET;
@@ -23,7 +24,7 @@ export const getAccessToken = async () => {
   return response.data;
 }
 
-export const getTopArtists = async (): Promise<unknown> => {
+export const getTopArtists = async (): Promise<ArtistApiResponse> => {
   const { access_token } = await getAccessToken()
 
   return axios.get(TOP_TRACKS_ENDPOINT, {
