@@ -72,11 +72,13 @@ export const Guess: FC<GuessProps> = ({ name, images, groupOrPerson, popularity,
             {groupOrPerson === 'Person' ? (
               <p className="mb-3 font-normal">Birth</p>
             ) : (
-              <p className="mb-3 font-normal ">Debut</p>
+              <p className="mb-3 font-semibold">Debut</p>
             )}
-            <p className="text-lg font-semibold">
+            <p className="text-lg">
               {debut}
-              {debutVal.recency === 'younger' ? <span> +</span> : <span> -</span>}
+              {debutVal.result !== 'correct' && (
+                <p className="text-sm">{debutVal.recency === 'younger' ? 'Younger' : 'Older'}</p>
+              )}
             </p>
           </div>
 
@@ -102,7 +104,9 @@ export const Guess: FC<GuessProps> = ({ name, images, groupOrPerson, popularity,
             <p className="mb-3 font-normal">Popularity</p>
             <p className="text-lg font-semibold">
               {popularity}
-              {popularityVal.recency === 'younger' ? <span> +</span> : <span> -</span>}
+              {popularityVal.result !== 'correct' && (
+                <p className="text-sm">{popularityVal.recency === 'younger' ? 'More popular' : 'Less popular'}</p>
+              )}
             </p>
           </div>
 

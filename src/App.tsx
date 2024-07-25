@@ -7,9 +7,9 @@ import { Artist } from './types/artists';
 import { getMoreArtistInfo } from './utils/api';
 
 /**
- * Need to work out the location based closeness
- * Hold game state, game over, won game and reset game logic
- * Work out logging into spotify
+ * 1 - Need to work out the location based closeness
+ * 2 - Hold game state, game over, won game and reset game logic
+ * 3 - Work out logging into spotify
  */
 
 export const RandomArtistContext = createContext<Artist | null>(null);
@@ -29,7 +29,7 @@ export const App = () => {
             ...artist,
             gender,
             country: area.name,
-            debut: lifeSpan.begin.slice(0, 4),
+            debut: lifeSpan.begin ? lifeSpan.begin.slice(0, 4) : '0000',
             groupOrPerson: type,
           };
 
@@ -60,9 +60,7 @@ export const App = () => {
   return (
     <RandomArtistContext.Provider value={randomArtist}>
       <div className="flex flex-col items-center">
-        <h1 className="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight mb-10">
-          Spotify Guessing Game
-        </h1>
+        <h1 className="text-6xl font-bold dark:text-gray-200 leading-normal mb-10">Your Spotle</h1>
 
         <GuessInput addGuess={getGuessArtistInfo} />
       </div>
