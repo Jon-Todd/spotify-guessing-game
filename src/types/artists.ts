@@ -1,25 +1,29 @@
 import { AxiosHeaders } from "axios";
 
 export interface Artist {
-    external_urls: {
-      spotify: string;
-    };
-    followers: {
-      href: string | null;
-      total: number;
-    };
-    genres: string[];
-    href: string;
-    id: string;
-    images: {
-      url: string;
-      width: number;
-      height: number;
-    }[];
-    name: string;
-    popularity: number;
-    type: string;
+  external_urls: {
+    spotify: string;
+  };
+  followers: {
+    href: string | null;
+    total: number;
+  };
+  genres: string[];
+  href: string;
+  id: string;
+  images: {
+    url: string;
+    width: number;
+    height: number;
+  }[];
+  name: string;
+  popularity: number;
+  type: string;
 	uri: string;
+  country?: string;
+  gender?: string;
+  debut?: string;
+  groupOrPerson?: string;
 }
 
 export interface ArtistsResponse {

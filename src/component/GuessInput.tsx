@@ -7,9 +7,7 @@ interface GuessInputProps {
     addGuess: (guess: Artist) => void;
 }
 
-export const GuessInput: FC<GuessInputProps> = ({
-    addGuess
-}) => {
+export const GuessInput: FC<GuessInputProps> = ({ addGuess }) => {
     const { artists } = useTopArtists();
 
     return (
